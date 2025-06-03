@@ -80,7 +80,29 @@ This project demonstrates various security programming concepts and best practic
 
 - Node.js (v14 or higher)
 - Redis (for session storage if using session-based auth)
-- Database (configured in .env file)
+- MySQL Database (configured in .env file)
+
+### Database Setup
+
+Before running the application, you need to set up a MySQL database using Docker. Run the following command:
+
+```bash
+docker run -d --name my-mysql \
+  -e MYSQL_ROOT_PASSWORD=<your_root_password> \
+  -e MYSQL_DATABASE=<your_database_name> \
+  -e MYSQL_USER=<your_database_user> \
+  -e MYSQL_PASSWORD=<your_database_password> \
+  -p 3306:3306 mysql:8
+```
+
+Replace the placeholders with your desired values:
+
+- `<your_root_password>`: Root password for MySQL
+- `<your_database_name>`: Name of your database
+- `<your_database_user>`: Username for database access
+- `<your_database_password>`: Password for the database user
+
+Make sure to use these same values in your `.env` file configuration.
 
 ### Installation
 

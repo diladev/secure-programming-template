@@ -8,7 +8,6 @@ const { connectDB } = require("./config/database");
 const { requestLogger } = require("./middlewares/logger.middleware");
 const authRoutes = require("./routes/auth.route");
 const { errorHandler } = require("./middlewares/error.middleware");
-const sanitizeInput = require("./middlewares/sanitize.middleware");
 // Week 5: Session Management
 // IMPORTANT: Choose ONE authentication method - either JWT or Session
 // const { sessionMiddleware, validateSession } = require("./middlewares/session.middleware");
@@ -65,10 +64,6 @@ app.use(
 app.use(requestLogger);
 
 app.use(express.json());
-
-// Week 3: Input Sanitization
-// Sanitize all incoming requests to prevent XSS
-app.use(sanitizeInput);
 
 // Week 5: Authentication and Authorization
 // IMPORTANT: If using session-based authentication, uncomment these lines

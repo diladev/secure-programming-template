@@ -25,6 +25,8 @@ const connectDB = async () => {
 
     // Sync all models - force: true will drop and recreate tables
     await sequelize.sync({ force: true });
+    // Sync all models without forcing recreation
+    // await sequelize.sync();
     console.log("All models were synchronized successfully.");
   } catch (error) {
     console.error("Unable to connect to the database:", error);

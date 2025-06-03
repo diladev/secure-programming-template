@@ -1,7 +1,7 @@
 // Week 2: Data Validation and DTOs
 // Input validation using DTOs to prevent injection and input misuse
 const { registerSchema, loginSchema } = require("../dtos/user.dto");
-// const { initializeFirebase } = require("../config/firebase");
+const { initializeFirebase } = require("../config/firebase");
 
 // Week 4: Password Security
 // Password hashing and salting implementation
@@ -16,7 +16,7 @@ const jwt = require("../utils/jwt");
 const User = require("../models/user.model");
 
 // Initialize Firebase Admin
-// const admin = initializeFirebase();
+const admin = initializeFirebase();
 
 // Week 4: Password Security
 // Custom salt for additional security layer
@@ -47,7 +47,6 @@ const verifyAppCheckToken = async (token) => {
     appId: "development",
   };
 
-  /*
   try {
     if (!token || typeof token !== "string") {
       return {
@@ -57,7 +56,9 @@ const verifyAppCheckToken = async (token) => {
     }
 
     // Basic token format validation
-    if (!token.match(/^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/)) {
+    if (
+      !token.match(/^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/)
+    ) {
       return {
         isValid: false,
         error: "Invalid token format",
@@ -65,10 +66,12 @@ const verifyAppCheckToken = async (token) => {
     }
 
     const decodedToken = await admin.appCheck().verifyToken(token);
-    
+
     // Log successful verification (without sensitive data)
-    console.log(`App Check verification successful for appId: ${decodedToken.appId}`);
-    
+    console.log(
+      `App Check verification successful for appId: ${decodedToken.appId}`
+    );
+
     return {
       isValid: true,
       appId: decodedToken.appId,
@@ -76,16 +79,16 @@ const verifyAppCheckToken = async (token) => {
     };
   } catch (error) {
     console.error("App Check verification error:", error.message);
-    
+
     // Handle specific Firebase errors
-    if (error.code === 'app-check/invalid-argument') {
+    if (error.code === "app-check/invalid-argument") {
       return {
         isValid: false,
         error: "Invalid token format",
       };
     }
-    
-    if (error.code === 'app-check/token-expired') {
+
+    if (error.code === "app-check/token-expired") {
       return {
         isValid: false,
         error: "Token has expired",
@@ -97,7 +100,6 @@ const verifyAppCheckToken = async (token) => {
       error: "App verification failed",
     };
   }
-  */
 };
 
 // Week 5: User Registration Security
